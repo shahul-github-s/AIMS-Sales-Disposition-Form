@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <title>Disposition Form</title>
+    <style>
+      .loading {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>Disposition Form</header>
+      <form
+        action="index.html"
+        name="submit-to-google-sheet"
+        autocomplete="off"
+        method="POST"
+        id="form"
+      >
+        <div class="form first">
+          <div class="details personal">
+            <span class="title">Customer Details</span>
+            <div class="fields">
+              <div class="input-field">
+                <label>Mobile Number</label>
+                <input
+                  type="number"
+                  placeholder="Enter Mobile Number"
+                  name="Mobile Number"
+                  id="mobile-number"
+                  maxlength="10"
+                  required
+                />
+              </div>
+
+              <div class="input-field">
+                <label>Customer Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter Customer Name"
+                  name="Customer Name"
+                  id="customer-name"
+                  required
+                />
+              </div>
+
+              <div class="input-field">
+                <label>Location</label>
+                <select name="Location" id="location" required>
+                  <option disabled selected>Select Location</option>
+                  <option value="Panruti (M)">Panruti (M)</option>
+                  <option value="Cuddalore">Cuddalore</option>
+                  <option value="Villupuram">Villupuram</option>
+                  <option value="Neyveli">Neyveli</option>
+                  <option value="Nellikuppam">Nellikuppam</option>
+                  <option value="Akkadavalli">Akkadavalli</option>
+                  <option value="Alagappasamudram">Alagappasamudram</option>
+                  <option value="Alagapperumalkuppam">
+                    Alagapperumalkuppam
+                  </option>
+                  <option value="Anguchettipalayam">Anguchettipalayam</option>
+                  <option value="Ariyirundamangalam">Ariyirundamangalam</option>
+                  <option value="Aviyanur">Aviyanur</option>
+                  <option value="Chittarasur">Chittarasur</option>
+                  <option value="Eidanur">Eidanur</option>
+                  <option value="Elandampattu">Elandampattu</option>
+                  <option value="Enadirimangalam">Enadirimangalam</option>
+                  <option value="Ezhumedu">Ezhumedu</option>
+                  <option value="Kadampuliyur">Kadampuliyur</option>
+                  <option value="Kandarakkottai (North)">
+                    Kandarakkottai (North)
+                  </option>
+                  <option value="Kanisapakkam">Kanisapakkam</option>
+                  <option value="Karukkai">Karukkai</option>
+                  <option value="Karumbur">Karumbur</option>
+                  <option value="Kattugudalur">Kattugudalur</option>
+                  <option value="Kavanur">Kavanur</option>
+                  <option value="Kayapakkam">Kayapakkam</option>
+                  <option value="Kilakuppam">Kilakuppam</option>
+                  <option value="Kilarungunam">Kilarungunam</option>
+                  <option value="Kiliruppu">Kiliruppu</option>
+                  <option value="Kilkangeyankuppam">Kilkangeyankuppam</option>
+                  <option value="Kilkavarapattu">Kilkavarapattu</option>
+                  <option value="Kilmambattu">Kilmambattu</option>
+                  <option value="Kolapakkam">Kolapakkam</option>
+                  <option value="Kongarayanur">Kongarayanur</option>
+                  <option value="Korathi">Korathi</option>
+                  <option value="Kottambakkam">Kottambakkam</option>
+                  <option value="Kozhipakkam">Kozhipakkam</option>
+                  <option value="Lakshminarayanapuram (CT)">
+                    Lakshminarayanapuram (CT)
+                  </option>
+                  <option value="Maligamedu">Maligamedu</option>
+                  <option value="Maligampattu">Maligampattu</option>
+                  <option value="Manamthavizhnthaputhur">
+                    Manamthavizhnthaputhur
+                  </option>
+                  <option value="Manappakkam">Manappakkam</option>
+                  <option value="Marungur">Marungur</option>
+                  <option value="Melarungunam">Melarungunam</option>
+                  <option value="Meliruppu">Meliruppu</option>
+                  <option value="Melkangeyankuppam">Melkangeyankuppam</option>
+                  <option value="Melkavarapattu">Melkavarapattu</option>
+                  <option value="Melkumaramangalam (South)">
+                    Melkumaramangalam (South)
+                  </option>
+                  <option value="Melmambattu">Melmambattu</option>
+                  <option value="Nadukuppam">Nadukuppam</option>
+                  <option value="Natham">Natham</option>
+                  <option value="Oraiyur">Oraiyur</option>
+                  <option value="Pagandai">Pagandai</option>
+                  <option value="Paithambadi">Paithambadi</option>
+                  <option value="Palappattu">Palappattu</option>
+                  <option value="Pallavarayanatham">Pallavarayanatham</option>
+                  <option value="Palur">Palur</option>
+                  <option value="Panapakkam">Panapakkam</option>
+                  <option value="Pandarakkottai">Pandarakkottai</option>
+                  <option value="Panikkankuppam">Panikkankuppam</option>
+                  <option value="Perperiyankuppam">Perperiyankuppam</option>
+                  <option value="Perumalnaickenpalayam">
+                    Perumalnaickenpalayam
+                  </option>
+                  <option value="Poondi">Poondi</option>
+                  <option value="Poongunam">Poongunam</option>
+                  <option value="Pulavanur">Pulavanur</option>
+                  <option value="Purangani">Purangani</option>
+                  <option value="Rayarpalayam">Rayarpalayam</option>
+                  <option value="Sanniyasipettai">Sanniyasipettai</option>
+                  <option value="Sathippattu">Sathippattu</option>
+                  <option value="Semakottai">Semakottai</option>
+                  <option value="Semmedu">Semmedu</option>
+                  <option value="Silambinathanpettai">
+                    Silambinathanpettai
+                  </option>
+                  <option value="Sirugramam">Sirugramam</option>
+                  <option value="Sirunangaivadi">Sirunangaivadi</option>
+                  <option value="Siruvathur">Siruvathur</option>
+                  <option value="Sorathur">Sorathur</option>
+                  <option value="Sundaravandi">Sundaravandi</option>
+                  <option value="Talambattu">Talambattu</option>
+                  <option value="Thirasu">Thirasu</option>
+                  <option value="Thiruthuraiyur">Thiruthuraiyur</option>
+                  <option value="Thorapadi (TP)">Thorapadi (TP)</option>
+                  <option value="Tiruvamur">Tiruvamur</option>
+                  <option value="Ulundamabattu">Ulundamabattu</option>
+                  <option value="Vallam">Vallam</option>
+                  <option value="Varinjipakkam">Varinjipakkam</option>
+                  <option value="Veerapperumanallur">Veerapperumanallur</option>
+                  <option value="Vegakollai">Vegakollai</option>
+                  <option value="Virasingankuppam">Virasingankuppam</option>
+                  <option value="Visur">Visur</option>
+                  <option value="Pondicherry">Pondicherry</option>
+                  <option value="Ariyalur">Ariyalur</option>
+                  <option value="Chengalpattu">Chengalpattu</option>
+                  <option value="Chennai">Chennai</option>
+                  <option value="Coimbatore">Coimbatore</option>
+                  <option value="Dharmapuri">Dharmapuri</option>
+                  <option value="Dindigul">Dindigul</option>
+                  <option value="Erode">Erode</option>
+                  <option value="Kallakurichi">Kallakurichi</option>
+                  <option value="Kancheepuram">Kancheepuram</option>
+                  <option value="Karur">Karur</option>
+                  <option value="Krishnagiri">Krishnagiri</option>
+                  <option value="Madurai">Madurai</option>
+                  <option value="Mayiladuthurai">Mayiladuthurai</option>
+                  <option value="Nagapattinam">Nagapattinam</option>
+                  <option value="Kanniyakumari">Kanniyakumari</option>
+                  <option value="Namakkal">Namakkal</option>
+                  <option value="Perambalur">Perambalur</option>
+                  <option value="Pudukottai">Pudukottai</option>
+                  <option value="Ramanathapuram">Ramanathapuram</option>
+                  <option value="Ranipet">Ranipet</option>
+                  <option value="Salem">Salem</option>
+                  <option value="Sivagangai">Sivagangai</option>
+                  <option value="Tenkasi">Tenkasi</option>
+                  <option value="Thanjavur">Thanjavur</option>
+                  <option value="Theni">Theni</option>
+                  <option value="Thiruvallur">Thiruvallur</option>
+                  <option value="Thoothukudi">Thoothukudi</option>
+                  <option value="Thiruvarur">Thiruvarur</option>
+                  <option value="Trichirappalli">Trichirappalli</option>
+                  <option value="Thirunelveli">Thirunelveli</option>
+                  <option value="Tirupathur">Tirupathur</option>
+                  <option value="Tiruppur">Tiruppur</option>
+                  <option value="Tiruvannamalai">Tiruvannamalai</option>
+                  <option value="The Nilgiris">The Nilgiris</option>
+                  <option value="Vellore">Vellore</option>
+                  <option value="Virudhunagar">Virudhunagar</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label>Date of Birth</label>
+                <input
+                  type="date"
+                  placeholder="Enter birth date"
+                  name="Date of Birth"
+                  id="date-of-birth"
+                  min="1000-01-01"
+                  max="9999-12-31"
+                />
+              </div>
+              <div class="input-field">
+                <label>Gender</label>
+                <select name="Gender" id="gender" required>
+                  <option disabled selected>Select Gender</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>TransGender</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label>Dispositioned By</label>
+                <select name="Dispositioned By" required>
+                  <option disabled selected>Select Staff Name</option>
+                  <option value="Rajeswari S">Rajeswari S</option>
+                  <option value="Susmitha S">Susmitha S</option>
+                  <option value="Gayathri S">Gayathri S</option>
+                  <option value="Vasuthiyagarajan S">Vasuthiyagarajan S</option>
+                  <option value="Kaviya M">Kaviya M</option>
+                  <option value="Mathiazhagan">Mathiazhagan</option>
+                  <option value="Mohamed Refai">Mohamed Refai</option>
+                  <option value="Shaffi Hussain">Shaffi Hussain</option>
+                  <option value="Sheerin Banu A">Sheerin Banu A</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="details ID">
+            <span class="title">Service Details</span>
+            <div class="fields">
+              <div class="input-field">
+                <label>Service Category</label>
+                <select name="Category" id="category-select" required>
+                  <option disabled selected>Select Service Category</option>
+                  <option value="General Services">General Services</option>
+                  <option value="E-Savai">E-Savai</option>
+                  <option value="Job Application Support">
+                    Job Application Support
+                  </option>
+                  <option value="Travel Services">Travel Services</option>
+                  <!-- <option value="Tour Services">Tour Services</option> -->
+                </select>
+              </div>
+
+              <div class="input-field">
+                <label>Service Department</label>
+                <select name="Department" id="department-select" required>
+                  <option disabled selected>Select Service Department</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label>Service Name</label>
+                <select name="Service" id="service-select" required>
+                  <option disabled selected>Select Service Name</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label>Lead Generated Source</label>
+                <select
+                  name="Lead Generated Source"
+                  id="lead-source-select"
+                  required
+                >
+                  <option disabled>Select Lead Generated Source Name</option>
+                  <option value="AIMS" selected>AIMS</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label>Customer Source</label>
+                <select
+                  name="Customer Source"
+                  id="customer-source-select"
+                  required
+                >
+                  <option disabled>Select Customer Source Name</option>
+                  <option selected value="Walk-in">Walk-in</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label>Referrel Code</label>
+                <select name="Referrel Code" id="referral-code-select" required>
+                  <option disabled id="default-option">
+                    Select Referral Code
+                  </option>
+                  <option value="AIMS-2007" selected>AIMS-2007</option>
+                  <option value="AIMS-2024">AIMS-2024</option>
+                </select>
+              </div>
+            </div>
+            <button type="button" class="nextBtn">
+              <span class="btnText">Payment Details</span>
+              <i class="uil uil-navigator"></i>
+            </button>
+          </div>
+        </div>
+        <div class="form second">
+          <div class="details address">
+            <span class="title">Payment Details</span>
+            <div class="fields">
+              <div class="input-field">
+                <label>Application Charge</label>
+                <input
+                  type="number"
+                  placeholder="Enter Application Charge"
+                  name="Application Charge"
+                  id="application-charge"
+                  value="0"
+                  required
+                />
+              </div>
+              <div class="input-field">
+                <label>Service Charge</label>
+                <input
+                  type="number"
+                  placeholder="Enter Service Charge"
+                  name="Service Charge"
+                  id="service-charge"
+                  required
+                />
+              </div>
+              <div class="input-field">
+                <label>Total Amount</label>
+                <input
+                  type="number"
+                  placeholder="Service + Application Charge"
+                  name="Total Amount"
+                  id="total-amount"
+                  required
+                />
+              </div>
+
+              <div class="input-field">
+                <label>Credited Transaction Mode</label>
+                <select
+                  name="Credited Transaction Mode"
+                  id="credited-transaction-mode"
+                  required
+                >
+                  <option disabled selected>Select Transaction Mode</option>
+                  <option value="In-Hand Cash">In-Hand Cash</option>
+                  <option value="Online Transaction - UPI">
+                    Online Transaction - UPI
+                  </option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label>Debited Transaction Bank</label>
+                <select
+                  name="Debited Transaction Mode"
+                  id="debited-transaction-bank"
+                  required
+                >
+                  <option disabled selected>Select Debited Bank</option>
+                  <option value="No Debits">No Debits</option>
+                  <option value="KVB">KVB</option>
+                  <option value="HDFC">HDFC</option>
+                  <option value="Refai Account">Refai Account</option>
+                  <option value="Anees Account">Anees Account</option>
+                  <option value="E-Savai Wallet">E-Savai Wallet</option>
+                  <option value="Pan Card Wallet">Pan Card Wallet</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label>Pending Amount</label>
+                <input
+                  type="number"
+                  placeholder="Balance Amount"
+                  id="unsettled-amount"
+                  name="Balance Amount"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="details family">
+            <div class="fields"></div>
+            <div class="buttons">
+              <div class="backBtn">
+                <i class="uil uil-navigator"></i>
+                <span class="btnText">Back</span>
+              </div>
+              <button class="submit">
+                <span class="btnText">Submit</span>
+                <i class="uil uil-navigator"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script>
+      document
+        .getElementById("mobile-number")
+        .addEventListener("blur", function () {
+          var mobileNumber = this.value;
+          if (mobileNumber.length === 10) {
+            fetch(
+              "https://script.google.com/macros/s/AKfycbwh1e3JZmncFxkg3DO4FPE9alCjWm-VqkcO-QnqIarDcntHSTHkAYjEsVwQtKQBop0/exec?mobileNumber=" +
+                mobileNumber
+            )
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.customerName) {
+                  document.getElementById("customer-name").value =
+                    data.customerName;
+                  document.getElementById("gender").value = data.gender;
+                  document.getElementById("location").value = data.location;
+
+                  // Format the date of birth
+                  var dob = new Date(data.dateOfBirth);
+                  var formattedDOB = dob.toISOString().split("T")[0];
+                  document.getElementById("date-of-birth").value = formattedDOB;
+
+                  document.getElementById("unsettled-amount").value =
+                    data.unsettledAmount;
+                  document.getElementById("discount-amount").value =
+                    data.discountAmount;
+
+                  if (
+                    document.getElementById("customer-name").value ==
+                    "Customer not found"
+                  ) {
+                    alert("Customer Details not Found");
+                  }
+                } else {
+                  document.getElementById("customer-name").value =
+                    data.error || "Customer not found";
+                  document.getElementById("gender").value = "";
+                  document.getElementById("location").value = "";
+                  document.getElementById("date-of-birth").value = "";
+                  document.getElementById("unsettled-amount").value = "";
+                  document.getElementById("discount-amount").value = "";
+
+                  alert("Customer Details not Found");
+                }
+              })
+              .catch((error) => console.error("Error:", error));
+          }
+        });
+    </script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
