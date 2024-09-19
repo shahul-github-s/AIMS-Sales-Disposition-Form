@@ -1,9 +1,7 @@
-Version 1 on May 21, 2024, 12:42 AM
+Sales Disposition Data
 
 Deployment ID
-AKfycbz2mAv0E8eCsBTRQLnOXtFhM3ibiFSBxZU4bqy5GLTX0PCldXsffX93_kaLIAECDbWc
+AKfycbytVwFdS633AdX8wGgNyATR7aL19i45VwVDg3GEwEPOQcV4ZDeO-TYRk9_xjPm6uTZnjg
 
-Web app
-
-URL
-https://script.google.com/macros/s/AKfycbz2mAv0E8eCsBTRQLnOXtFhM3ibiFSBxZU4bqy5GLTX0PCldXsffX93_kaLIAECDbWc/exec
+Web URL
+https://script.google.com/macros/s/AKfycbytVwFdS633AdX8wGgNyATR7aL19i45VwVDg3GEwEPOQcV4ZDeO-TYRk9_xjPm6uTZnjg/exec

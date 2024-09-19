@@ -20,7 +20,7 @@
     <div class="container">
       <header>Disposition Form</header>
       <form
-        action="index.html"
+        action=""
         name="submit-to-google-sheet"
         autocomplete="off"
         method="POST"
@@ -55,7 +55,7 @@
 
               <div class="input-field">
                 <label>Location</label>
-                <select name="Location" id="location" required>
+                <select name="Location" id="location" required title="Location">
                   <option disabled selected>Select Location</option>
                   <option value="Panruti (M)">Panruti (M)</option>
                   <option value="Cuddalore">Cuddalore</option>
@@ -210,7 +210,7 @@
               </div>
               <div class="input-field">
                 <label>Gender</label>
-                <select name="Gender" id="gender" required>
+                <select name="Gender" id="gender" required title="Gender">
                   <option disabled selected>Select Gender</option>
                   <option>Male</option>
                   <option>Female</option>
@@ -219,7 +219,11 @@
               </div>
               <div class="input-field">
                 <label>Dispositioned By</label>
-                <select name="Dispositioned By" required>
+                <select
+                  name="Dispositioned By"
+                  required
+                  title="Dispositioned By"
+                >
                   <option disabled selected>Select Staff Name</option>
                   <option value="Rajeswari S">Rajeswari S</option>
                   <option value="Susmitha S">Susmitha S</option>
@@ -239,7 +243,12 @@
             <div class="fields">
               <div class="input-field">
                 <label>Service Category</label>
-                <select name="Category" id="category-select" required>
+                <select
+                  name="Category"
+                  id="category-select"
+                  required
+                  title="Category"
+                >
                   <option disabled selected>Select Service Category</option>
                   <option value="General Services">General Services</option>
                   <option value="E-Savai">E-Savai</option>
@@ -253,13 +262,23 @@
 
               <div class="input-field">
                 <label>Service Department</label>
-                <select name="Department" id="department-select" required>
+                <select
+                  name="Department"
+                  id="department-select"
+                  required
+                  title="Department"
+                >
                   <option disabled selected>Select Service Department</option>
                 </select>
               </div>
               <div class="input-field">
-                <label>Service Name</label>
-                <select name="Service" id="service-select" required>
+                <label>Service Operation</label>
+                <select
+                  name="Service Operation"
+                  id="service-select"
+                  required
+                  title="Service Operation"
+                >
                   <option disabled selected>Select Service Name</option>
                 </select>
               </div>
@@ -269,6 +288,7 @@
                   name="Lead Generated Source"
                   id="lead-source-select"
                   required
+                  title="Lead Generated Source"
                 >
                   <option disabled>Select Lead Generated Source Name</option>
                   <option value="AIMS" selected>AIMS</option>
@@ -280,6 +300,7 @@
                   name="Customer Source"
                   id="customer-source-select"
                   required
+                  title="Customer Source"
                 >
                   <option disabled>Select Customer Source Name</option>
                   <option selected value="Walk-in">Walk-in</option>
@@ -287,7 +308,12 @@
               </div>
               <div class="input-field">
                 <label>Referrel Code</label>
-                <select name="Referrel Code" id="referral-code-select" required>
+                <select
+                  name="Referrel Code"
+                  id="referral-code-select"
+                  required
+                  title="Referral Code"
+                >
                   <option disabled id="default-option">
                     Select Referral Code
                   </option>
@@ -344,6 +370,7 @@
                   name="Credited Transaction Mode"
                   id="credited-transaction-mode"
                   required
+                  title="Credited Transaction Mode"
                 >
                   <option disabled selected>Select Transaction Mode</option>
                   <option value="In-Hand Cash">In-Hand Cash</option>
@@ -358,6 +385,7 @@
                   name="Debited Transaction Mode"
                   id="debited-transaction-bank"
                   required
+                  title="Debited Transaction Mode"
                 >
                   <option disabled selected>Select Debited Bank</option>
                   <option value="No Debits">No Debits</option>
@@ -389,7 +417,7 @@
                 <i class="uil uil-navigator"></i>
                 <span class="btnText">Back</span>
               </div>
-              <button class="submit">
+              <button class="submit" type="submit">
                 <span class="btnText">Submit</span>
                 <i class="uil uil-navigator"></i>
               </button>
@@ -398,7 +426,7 @@
         </div>
       </form>
     </div>
-    <script>
+    <!-- <script>
       document
         .getElementById("mobile-number")
         .addEventListener("blur", function () {
@@ -447,7 +475,7 @@
               .catch((error) => console.error("Error:", error));
           }
         });
-    </script>
+    </script> -->
 
     <script src="script.js"></script>
   </body>

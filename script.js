@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
 
     const scriptURL =
-      "https://script.google.com/macros/s/AKfycbz2mAv0E8eCsBTRQLnOXtFhM3ibiFSBxZU4bqy5GLTX0PCldXsffX93_kaLIAECDbWc/exec";
+      "https://script.google.com/macros/s/AKfycbykMXLLMmrncqTivOwgRkM9LRKukUKkqBl65Lhq8sHLXIizEBVT0e5f4t9vN3sd8HHDew/exec";
 
     if (
       creditedTransactionMode === "Select Transaction Mode" ||
