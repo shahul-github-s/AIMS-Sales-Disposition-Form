@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "Dharisanam Bookings",
       "Typing Services",
     ],
-    "E-Savai": [
+    "E-Sevai": [
       "Income Certificate",
       "Community Certificate",
       "Nativity Certificate",
