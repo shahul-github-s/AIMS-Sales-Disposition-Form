@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "Browsing",
       "MSME",
       "UDAY Scheme",
+      "AePS",
     ],
     "E-Sevai": [
       "Income Certificate",
