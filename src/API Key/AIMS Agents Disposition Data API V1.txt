@@ -1,7 +1,0 @@
-Sales Disposition Data
-
-Deployment ID
-AKfycbytVwFdS633AdX8wGgNyATR7aL19i45VwVDg3GEwEPOQcV4ZDeO-TYRk9_xjPm6uTZnjg
-
-Web URL
-https://script.google.com/macros/s/AKfycbytVwFdS633AdX8wGgNyATR7aL19i45VwVDg3GEwEPOQcV4ZDeO-TYRk9_xjPm6uTZnjg/exec
