@@ -226,6 +226,7 @@
                   <option value="Mohamed Refai">Mohamed Refai</option>
                   <option value="Shaffi Hussain">Shaffi Hussain</option>
                   <option value="Sheerin Banu A">Sheerin Banu A</option>
+                  <option value="Riyaz">Riyaz</option>
                 </select>
               </div>
             </div>
@@ -447,17 +448,13 @@
                   document.getElementById("discount-amount").value =
                     data.discountAmount;
 
-                  if (
-                    document.getElementById("customer-name").value ==
-                    ""
-                  ) {
+                  if (document.getElementById("customer-name").value == "") {
                     alert("Customer Details not Found");
                   }
                 } else {
                   // When customer details are not found
                   alert("Customer Details not Found");
-                  document.getElementById("customer-name").value =
-                    "";
+                  document.getElementById("customer-name").value = "";
                   document.getElementById("gender").value = "";
                   document.getElementById("location").value = "";
                   document.getElementById("date-of-birth").value = "";
