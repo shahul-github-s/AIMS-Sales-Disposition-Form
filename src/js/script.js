@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         // Proceed with form submission
         const scriptURL =
-          "https://script.google.com/macros/s/AKfycby9z7SRWfKlM8LUIleYCkcDz-AfDAu8IyZI4KB-8P4ZoQwld6_o5W9pE8zV2G9LV7Nt/exec";
+          "https://script.google.com/macros/s/AKfycbwFoBwuxHwSvfYdnHmDgF8mluvB12p_Jgr-0PioN1IDPvGPrN3lBa87aZk3dYQW9JFC/exec";
 
         fetch(scriptURL, { method: "POST", body: new FormData(form) })
           .then((response) => {
