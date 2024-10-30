@@ -55,14 +55,22 @@ document.addEventListener("DOMContentLoaded", function () {
       "debited-transaction-bank"
     ).value;
 
+    // Get the submit button
+    const submitButton = form.querySelector('button[type="submit"]');
+
     // Confirmation alert before submission
     if (confirm("Are you sure you want to submit the form?")) {
+      // Disable the submit button to prevent multiple clicks
+      submitButton.disabled = true;
+
       // Check if transaction details are valid
       if (
         creditedTransactionMode === "Select Transaction Mode" ||
         debitedTransactionBank === "Select Debited Bank"
       ) {
         alert("Please select valid Transaction Details.");
+        // Re-enable the button if the transaction details are not valid
+        submitButton.disabled = false;
       } else {
         // Proceed with form submission
         const scriptURL =
@@ -74,11 +82,19 @@ document.addEventListener("DOMContentLoaded", function () {
             // Reload the page or clear the form after submission
             location.reload();
           })
-          .catch((error) => console.error("Error!", error.message));
+          .catch((error) => {
+            console.error("Error!", error.message);
+            alert(
+              "An error occurred while submitting the form. Please try again."
+            );
+            // Re-enable the button if there is an error
+            submitButton.disabled = false;
+          });
       }
     } else {
-      // If user cancels, do nothing
+      // If user cancels, do nothing and re-enable the button
       alert("Form submission cancelled.");
+      submitButton.disabled = false;
     }
   });
 
