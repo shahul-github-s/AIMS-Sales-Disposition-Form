@@ -314,7 +314,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const leadSources = {
     AIMS: "Walk-in",
-    "CR Digital Vibes": "Meta AD",
+    "CR Digital Vibes": [
+      "Meta AD",
+      "WhatsApp",
+      "Instagram",
+      "Facebook",
+      "Campaigns",
+      "Walk-in",
+    ],
   };
 
   referralCodeSelect.addEventListener("change", function () {
@@ -331,16 +338,19 @@ document.addEventListener("DOMContentLoaded", function () {
       customerSourceSelect.value = relevantCustomerSource;
     }
 
-    const relevantLeadSource = leadSources[relevantCustomerSource] || "";
+    // Update lead source options based on the selected customer source
+    const relevantLeadSources = leadSources[relevantCustomerSource] || [];
+
     leadSourceSelect.innerHTML =
       "<option disabled selected>Select Lead Generated Source Name</option>";
-    if (relevantLeadSource) {
+
+    // Add options to lead source select
+    relevantLeadSources.forEach((source) => {
       const option = document.createElement("option");
-      option.value = relevantLeadSource;
-      option.textContent = relevantLeadSource;
+      option.value = source;
+      option.textContent = source;
       leadSourceSelect.appendChild(option);
-      leadSourceSelect.value = relevantLeadSource;
-    }
+    });
   });
 
   customerSourceSelect.addEventListener("change", function () {
