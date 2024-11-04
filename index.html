@@ -426,11 +426,27 @@
           var mobileNumber = this.value;
           if (mobileNumber.length === 10) {
             fetch(
-              "https://script.google.com/macros/s/AKfycbyaNzu82FjKh3tmjy36GAONHA8D_YLr0DlxSutFHPsuxbAOJipMQl92SQgdhdwWC8L3/exec?mobileNumber=" +
+              "https://script.google.com/macros/s/AKfycbyhZ1hPtMLDDNuv4M7SoqzOdhkWymlkYu--wFlhu1CMirvKu2oqeXhP5eYSvQgGc0qJ/exec?mobileNumber=" +
                 mobileNumber
             )
-              .then((response) => response.json())
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error(
+                    "Network response was not ok: " + response.statusText
+                  );
+                }
+                return response.json();
+              })
               .then((data) => {
+                // Log the fetched data to the console
+                console.log("Fetched Data:", data);
+
+                if (data.error) {
+                  // Handle errors returned from the Apps Script
+                  alert(data.error);
+                  return; // Stop further execution
+                }
+
                 if (data.customerName) {
                   alert("Customer Details Found");
                   document.getElementById("customer-name").value =
@@ -438,10 +454,17 @@
                   document.getElementById("gender").value = data.gender;
                   document.getElementById("location").value = data.location;
 
-                  // Format the date of birth
-                  var dob = new Date(data.dateOfBirth);
-                  var formattedDOB = dob.toISOString().split("T")[0];
-                  document.getElementById("date-of-birth").value = formattedDOB;
+                  // Check if dateOfBirth is available
+                  if (data.dateOfBirth) {
+                    // Format the date of birth only if it's not empty
+                    var dob = new Date(data.dateOfBirth);
+                    var formattedDOB = dob.toISOString().split("T")[0];
+                    document.getElementById("date-of-birth").value =
+                      formattedDOB;
+                  } else {
+                    console.log("Date of Birth is not available.");
+                    document.getElementById("date-of-birth").value = ""; // Clear field if empty
+                  }
 
                   document.getElementById("unsettled-amount").value =
                     data.unsettledAmount;
@@ -458,7 +481,13 @@
                   document.getElementById("discount-amount").value = "";
                 }
               })
-              .catch((error) => console.error("Error:", error));
+              .catch((error) => {
+                console.error("Error:", error);
+                alert(
+                  "An error occurred while fetching customer details: " +
+                    error.message
+                );
+              });
           }
         });
     </script>
