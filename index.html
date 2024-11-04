@@ -426,7 +426,7 @@
           var mobileNumber = this.value;
           if (mobileNumber.length === 10) {
             fetch(
-              "https://script.google.com/macros/s/AKfycbwLaOLo7U3uluzAGOeUR6Gl9rCN4ZZttFulyWA8n2J9A991JuxMiorxDPYocbNL4ubh/exec?mobileNumber=" +
+              "https://script.google.com/macros/s/AKfycbyaNzu82FjKh3tmjy36GAONHA8D_YLr0DlxSutFHPsuxbAOJipMQl92SQgdhdwWC8L3/exec?mobileNumber=" +
                 mobileNumber
             )
               .then((response) => response.json())
@@ -447,10 +447,6 @@
                     data.unsettledAmount;
                   document.getElementById("discount-amount").value =
                     data.discountAmount;
-
-                  if (document.getElementById("customer-name").value == "") {
-                    alert("Customer Details not Found");
-                  }
                 } else {
                   // When customer details are not found
                   alert("Customer Details not Found");
