@@ -45,42 +45,94 @@ document.addEventListener("DOMContentLoaded", function () {
     form.classList.remove("secActive");
   });
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevent form submission until confirmation
+  // form.addEventListener("submit", function (e) {
+  //   e.preventDefault(); // Prevent form submission until confirmation
 
-    const creditedTransactionMode = document.getElementById(
-      "credited-transaction-mode"
-    ).value;
+  //   const debitedTransactionBank = document.getElementById(
+  //     "debited-transaction-bank"
+  //   ).value;
+
+  //   // Get the submit button
+  //   const submitButton = form.querySelector('button[type="submit"]');
+
+  //   // Confirmation alert before submission
+  //   if (confirm("Are you sure you want to submit the form?")) {
+  //     // Disable the submit button to prevent multiple clicks
+  //     submitButton.disabled = true;
+
+  //     // Check if transaction details are valid
+  //     if (debitedTransactionBank === "Select Debited Bank") {
+  //       alert("Please select valid Transaction Details.");
+  //       // Re-enable the button if the transaction details are not valid
+  //       submitButton.disabled = false;
+  //     } else {
+  //       // Proceed with form submission
+  //       const scriptURL =
+  //         "https://script.google.com/macros/s/AKfycbwFoBwuxHwSvfYdnHmDgF8mluvB12p_Jgr-0PioN1IDPvGPrN3lBa87aZk3dYQW9JFC/exec";
+
+  //       fetch(scriptURL, { method: "POST", body: new FormData(form) })
+  //         .then((response) => {
+  //           alert("Thank you! Your form is submitted successfully.");
+  //           // Reload the page or clear the form after submission
+  //           location.reload();
+  //         })
+  //         .catch((error) => {
+  //           console.error("Error!", error.message);
+  //           alert(
+  //             "An error occurred while submitting the form. Please try again."
+  //           );
+  //           // Re-enable the button if there is an error
+  //           submitButton.disabled = false;
+  //         });
+  //     }
+  //   } else {
+  //     // If user cancels, do nothing and re-enable the button
+  //     alert("Form submission cancelled.");
+  //     submitButton.disabled = false;
+  //   }
+  // });
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    // Get the values of specific fields for validation
+    const totalAmount = document.getElementById("total-amount").value;
     const debitedTransactionBank = document.getElementById(
       "debited-transaction-bank"
     ).value;
+    const category = document.getElementById("category-select").value;
 
     // Get the submit button
     const submitButton = form.querySelector('button[type="submit"]');
 
-    // Confirmation alert before submission
+    // Confirmation dialog before proceeding
     if (confirm("Are you sure you want to submit the form?")) {
-      // Disable the submit button to prevent multiple clicks
+      // Disable the submit button to prevent multiple submissions
       submitButton.disabled = true;
 
-      // Check if transaction details are valid
+      // Validation check for required fields
       if (
-        creditedTransactionMode === "Select Transaction Mode" ||
+        totalAmount == 0 ||
         debitedTransactionBank === "Select Debited Bank"
       ) {
         alert("Please select valid Transaction Details.");
-        // Re-enable the button if the transaction details are not valid
+        // Re-enable submit button if validation fails
+        submitButton.disabled = false;
+      } else if (category === "Select Service Category") {
+        alert("Please select valid Service Details.");
+        // Re-enable submit button if validation fails
         submitButton.disabled = false;
       } else {
         // Proceed with form submission
         const scriptURL =
           "https://script.google.com/macros/s/AKfycbwFoBwuxHwSvfYdnHmDgF8mluvB12p_Jgr-0PioN1IDPvGPrN3lBa87aZk3dYQW9JFC/exec";
-
         fetch(scriptURL, { method: "POST", body: new FormData(form) })
           .then((response) => {
             alert("Thank you! Your form is submitted successfully.");
             // Reload the page or clear the form after submission
-            location.reload();
+            // location.reload();
+            submitButton.disabled = false;
+            clearFields();
           })
           .catch((error) => {
             console.error("Error!", error.message);
@@ -92,12 +144,25 @@ document.addEventListener("DOMContentLoaded", function () {
           });
       }
     } else {
-      // If user cancels, do nothing and re-enable the button
+      // If the user cancels submission, re-enable the submit button
       alert("Form submission cancelled.");
       submitButton.disabled = false;
     }
   });
-
+  function clearFields() {
+    // Clear all the fields if no match is found or input is incomplete
+    document.getElementById("category-select").value =
+      "Select Service Category";
+    document.getElementById("department-select").value = "Select Debited Bank";
+    document.getElementById("service-select").value = "Select Service Name";
+    document.getElementById("debited-transaction-bank").value =
+      "Select Service Name";
+    document.getElementById("application-charge").value = "0";
+    document.getElementById("service-charge").value = "0";
+    document.getElementById("cash").value = "";
+    document.getElementById("upi").value = "";
+    document.getElementById("total-amount").value = "0";
+  }
   const categorySelect = document.getElementById("category-select");
   const departmentSelect = document.getElementById("department-select");
   const serviceSelect = document.getElementById("service-select");

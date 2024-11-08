@@ -118,7 +118,8 @@ select {
   color: #333;
 }
 .container form button,
-.backBtn {
+.backBtn,
+.refreshBtn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,10 +143,12 @@ form button:hover {
   background-color: #0543ec;
 }
 form button i,
-form .backBtn i {
+form .backBtn i,
+form .refreshBtn i {
   margin: 0 6px;
 }
-form .backBtn i {
+form .backBtn i,
+form .refreshBtn i {
   transform: rotate(180deg);
 }
 form .buttons {
@@ -153,7 +156,8 @@ form .buttons {
   align-items: center;
 }
 form .buttons button,
-.backBtn {
+.backBtn,
+refreshBtn {
   margin-right: 14px;
 }
 
