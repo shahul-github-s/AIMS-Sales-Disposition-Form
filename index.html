@@ -364,6 +364,7 @@
                   placeholder="Cash Amount"
                   name="In-Hand Cash"
                   id="cash"
+                  readonly
                   required
                 />
               </div>
@@ -489,11 +490,11 @@
                   } else {
                     // When customer details are not found
                     alert("Customer Details not Found");
-                    document.getElementById("customer-name").value = "";
-                    document.getElementById("gender").value = "";
-                    document.getElementById("location").value = "";
-                    document.getElementById("date-of-birth").value = "";
-                    document.getElementById("unsettled-amount").value = "";
+                    // document.getElementById("customer-name").value = "";
+                    // document.getElementById("gender").value = "";
+                    // document.getElementById("location").value = "";
+                    // document.getElementById("date-of-birth").value = "";
+                    // document.getElementById("unsettled-amount").value = "";
                     // document.getElementById("discount-amount").value = "";
                   }
                 })
@@ -523,6 +524,24 @@
 
           alert("Form has been reset.");
         });
+    </script>
+    <script>
+      const totalAmountInput = document.getElementById("total-amount");
+      const cashInput = document.getElementById("cash");
+      const upiInput = document.getElementById("upi");
+
+      // Copy total amount to cash on input
+      totalAmountInput.addEventListener("input", function () {
+        const totalAmount = parseFloat(totalAmountInput.value) || 0;
+        cashInput.value = totalAmount;
+      });
+
+      // Update cash value when UPI value changes
+      upiInput.addEventListener("input", function () {
+        const totalAmount = parseFloat(totalAmountInput.value) || 0;
+        const upiAmount = parseFloat(upiInput.value) || 0;
+        cashInput.value = totalAmount - upiAmount;
+      });
     </script>
   </body>
 </html>
