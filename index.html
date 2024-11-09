@@ -6,6 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/css/style.css" />
     <title>Disposition Form</title>
+    <style>
+      /* Popup styling */
+      .popup {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #4caf50;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 16px;
+        display: none;
+        z-index: 1000;
+      }
+
+      .popup.show {
+        display: block;
+        animation: fadeIn 3s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
   </head>
 
   <body>
@@ -30,6 +59,7 @@
                   name="Mobile Number"
                   id="mobile-number"
                   maxlength="10"
+                  oninput="checkMobileNumber()"
                   required
                 />
               </div>
@@ -435,7 +465,133 @@
         </div>
       </form>
     </div>
+
+    <!-- Popup Notification -->
+    <div id="popup" class="popup"></div>
+
     <script>
+      // Replace this with your actual Google Apps Script URL
+      const SHEET_JSON_URL =
+        "https://script.google.com/macros/s/AKfycbw4-05dStQez5_PFraHcB3Nfi0YBgdFwsXlpNJAsW-d3bnconcGGz2wsAjxDZi6UX7u/exec";
+
+      // Store the fetched customer data globally
+      let customerData = [];
+
+      // Fetch customer data when the page is loaded
+      async function fetchCustomerDataOnLoad() {
+        try {
+          const response = await fetch(SHEET_JSON_URL);
+          if (!response.ok) {
+            console.error(
+              "Failed to fetch data:",
+              response.status,
+              response.statusText
+            );
+            // alert("Failed to fetch customer data. Please try again.");
+            return;
+          }
+
+          customerData = await response.json();
+          console.log("Fetched customer data:", customerData);
+
+          // Show popup when data is successfully fetched
+          // showPopup("Customer data");
+
+          // After data is loaded, check if mobile number has 10 digits
+          checkMobileNumber(); // Call to check the mobile number length
+        } catch (error) {
+          console.error("Error fetching customer data:", error);
+          // alert("Failed to fetch customer data. Please try again.");
+        }
+      }
+
+      // Call the fetch function when the page is loaded
+      window.onload = fetchCustomerDataOnLoad;
+
+      // Check if mobile number has 10 digits before fetching data
+      function checkMobileNumber() {
+        const mobileInput = document.getElementById("mobile-number");
+        const mobileNumber = mobileInput.value.trim();
+
+        // If 10 digits are entered, fetch corresponding customer data
+        if (mobileNumber.length === 10) {
+          fetchCorrespondingCustomerData(mobileNumber);
+        }
+        // If less than 10 digits, do nothing
+      }
+
+      // Fetch and populate customer data based on the mobile number
+      function fetchCorrespondingCustomerData(mobileNumber) {
+        // Check if the data is already downloaded
+        if (customerData.length === 0) {
+          // alert(
+          //   "Customer data is not available. Please wait for the data to load."
+          // );
+          return;
+        }
+
+        // Ensure the mobile number is valid
+        if (mobileNumber.length !== 10 || isNaN(mobileNumber)) {
+          alert("Please enter a valid 10-digit mobile number.");
+          return;
+        }
+
+        // Find the customer by mobile number from the fetched customerData
+        const customer = customerData.find(
+          (row) => row["Mobile Number"] === Number(mobileNumber)
+        );
+
+        if (customer) {
+          showPopup("Existing Customer");
+          // Populate the form fields with the customer data
+          document.getElementById("customer-name").value =
+            customer["Customer Name"] || "";
+          document.getElementById("location").value =
+            customer["Location"] || "";
+
+          // Check if Date of Birth is available and format it if necessary
+          if (customer["Date of Birth"]) {
+            var dob = new Date(customer["Date of Birth"]);
+            var formattedDOB = dob.toISOString().split("T")[0]; // Format to YYYY-MM-DD
+            document.getElementById("date-of-birth").value = formattedDOB;
+          } else {
+            console.log("Date of Birth is not available.");
+            document.getElementById("date-of-birth").value = ""; // Clear field if empty
+          }
+
+          document.getElementById("gender").value = customer["Gender"] || "";
+          document.getElementById("unsettled-amount").value =
+            customer["Unsettled Amount"] || "";
+        } else {
+          showPopup("New Customer");
+          // alert("Customer not found.");
+          // clearFormFields();
+        }
+      }
+
+      // Clear form fields if customer not found or error occurs
+      function clearFormFields() {
+        document.getElementById("customer-name").value = "";
+        document.getElementById("location").value = "";
+        document.getElementById("date-of-birth").value = "";
+        document.getElementById("gender").value = "";
+        document.getElementById("unsettled-amount").value = "";
+      }
+
+      // Show popup notification
+      function showPopup(message) {
+        const popup = document.getElementById("popup");
+        popup.textContent = message;
+        popup.classList.add("show");
+
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+          popup.classList.remove("show");
+        }, 6000);
+      }
+    </script>
+
+    <!-- <script>
       document.addEventListener("DOMContentLoaded", function () {
         document
           .getElementById("mobile-number")
@@ -508,7 +664,7 @@
             }
           });
       });
-    </script>
+    </script> -->
     <script src="./src/js/script.js"></script>
 
     <script>
