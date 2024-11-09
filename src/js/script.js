@@ -187,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "UDAY Scheme",
       "AePS",
       "PF",
+      "Passport",
       "Others",
     ],
     "E-Sevai": [
@@ -250,7 +251,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "Others",
     ],
     "Travel Services": [
-      "Passport",
       "Flight Ticket",
       "Visa",
       "Certificate Attestation",
