@@ -187,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "UDAY Scheme",
       "AePS",
       "PF",
+      "Others",
     ],
     "E-Sevai": [
       "Income Certificate",
@@ -236,6 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "CGM",
       "PSTM",
       "Certificate for Lost Document",
+      "Others",
     ],
     "Job Application Support": [
       "TN Employment Registration",
@@ -245,6 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "Ration Shop",
       "RRB",
       "NLC",
+      "Others",
     ],
     "Travel Services": [
       "Passport",
@@ -257,6 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "Hotel Booking",
       "Medical Appointment",
       "Tour Services",
+      "Others",
     ],
     "Tour Services": ["Domestic Tour Packages", "International Packages"],
   };
