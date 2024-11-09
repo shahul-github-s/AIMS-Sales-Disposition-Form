@@ -188,6 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "AePS",
       "PF",
       "Passport",
+      "Printouts",
       "Others",
     ],
     "E-Sevai": [
@@ -376,6 +377,13 @@ document.addEventListener("DOMContentLoaded", function () {
       "PF Merge the Companies",
       "Advance Claim",
       "Full Claim",
+    ],
+    Printouts: [
+      "Black and White Printout",
+      "Colour Printout",
+      "WhatsApp Printout",
+      "Mail Printout",
+      "Scan and Share",
     ],
   };
 
