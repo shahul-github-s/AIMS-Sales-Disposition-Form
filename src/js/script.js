@@ -35,14 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const serviceSelect = document.getElementById("service-select").value;
     const serviceInput = document.getElementById("service-input").value;
-    if (serviceSelect === "Select Service Name" || serviceInput === "") {
-      alert("Please specify the Service Operation in the input field.");
-    } else {
+    if (serviceInput != "" || serviceSelect != "Select Service Name") {
       if (allFilled) {
         form.classList.add("secActive");
       } else {
         alert("Please fill all required fields before proceeding.");
       }
+    } else {
+      alert("Please specify the Service Operation in the input field.");
     }
   });
 
