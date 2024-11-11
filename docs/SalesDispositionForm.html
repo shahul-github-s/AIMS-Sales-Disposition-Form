@@ -4,37 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/css/style.css" />
+    <link rel="stylesheet" href="../src/css/style.css" />
     <title>Disposition Form</title>
-    <style>
-      /* Popup styling */
-      .popup {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: #4caf50;
-        color: white;
-        padding: 15px;
-        border-radius: 5px;
-        font-size: 16px;
-        display: none;
-        z-index: 1000;
+    <script>
+      // Check the login status from localStorage
+      const loginStatus = sessionStorage.getItem("login");
+      if (loginStatus !== "Success") {
+        // Redirect to index.html if login is not successful
+        window.location.href = "./index.html";
       }
-
-      .popup.show {
-        display: block;
-        animation: fadeIn 3s;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-    </style>
+    </script>
   </head>
 
   <body>
@@ -241,8 +220,17 @@
               </div>
               <div class="input-field">
                 <label>Dispositioned By</label>
-                <select
+                <input
+                  placeholder="Enter Staff Name"
                   name="Dispositioned By"
+                  id="dispositionedBy"
+                  title="Dispositioned By"
+                  required
+                  readonly
+                />
+                <!-- <select
+                  name="Dispositioned By"
+                  id="dispositionedBy"
                   required
                   title="Dispositioned By"
                 >
@@ -257,7 +245,7 @@
                   <option value="Shaffi Hussain">Shaffi Hussain</option>
                   <option value="Sheerin Banu A">Sheerin Banu A</option>
                   <option value="Riyaz">Riyaz</option>
-                </select>
+                </select> -->
               </div>
             </div>
           </div>
@@ -279,7 +267,6 @@
                     Job Application Support
                   </option>
                   <option value="Travel Services">Travel Services</option>
-                  <!-- <option value="Tour Services">Tour Services</option> -->
                 </select>
               </div>
 
@@ -294,16 +281,27 @@
                   <option disabled selected>Select Service Department</option>
                 </select>
               </div>
-              <div class="input-field">
+              <div class="input-field" id="service-container">
                 <label>Service Operation</label>
+
                 <select
                   name="Service Operation"
                   id="service-select"
-                  required
                   title="Service Operation"
                 >
-                  <option disabled selected>Select Service Name</option>
+                  <option disabled selected value="Select Service Name">
+                    Select Service Name
+                  </option>
                 </select>
+
+                <!-- This is the text input, initially hidden -->
+                <input
+                  type="text"
+                  id="service-input"
+                  name="Service Operation"
+                  placeholder="Please specify your service"
+                  style="display: none"
+                />
               </div>
               <div class="input-field">
                 <label>Lead Generated Source</label>
@@ -345,7 +343,7 @@
                 </select>
               </div>
             </div>
-            <button type="button" class="nextBtn">
+            <button type="button" class="nextBtn" onclick="">
               <span class="btnText">Payment Details</span>
               <i class="uil uil-navigator"></i>
             </button>
@@ -474,6 +472,30 @@
     <!-- Popup Notification -->
     <div id="popup" class="popup"></div>
 
+    <button class="form-button" onclick="window.location.href='./index.html'">
+      <img src="../src/images/logout-button.png" alt="Exit Icon" />
+    </button>
+
+    <script>
+      const popup = document.getElementById("popup");
+      popup.textContent = "Welcome " + sessionStorage.getItem("loggedInUser");
+      popup.classList.add("show");
+
+      // Hide the popup after 3 seconds
+      setTimeout(() => {
+        popup.classList.remove("show");
+      }, 6000);
+    </script>
+
+    <script>
+      window.onload = function () {
+        // Retrieve the logged-in user's name from localStorage
+        const loggedInUser = sessionStorage.getItem("loggedInUser");
+        // Debugging: Log retrieved value from localStorage
+        console.log("Retrieved from localStorage:", loggedInUser);
+      };
+    </script>
+
     <script>
       // Replace this with your actual Google Apps Script URL
       const SHEET_JSON_URL =
@@ -484,6 +506,27 @@
 
       // Fetch customer data when the page is loaded
       async function fetchCustomerDataOnLoad() {
+        // Retrieve the logged-in user's name from localStorage
+        const loggedInUser = sessionStorage.getItem("loggedInUser");
+
+        // Debugging: Log retrieved value from localStorage
+        console.log("Retrieved from localStorage:", loggedInUser);
+
+        // If the username exists in localStorage, set the dropdown selection
+        if (loggedInUser) {
+          document.getElementById("dispositionedBy").value = loggedInUser;
+
+          // const dropdown = document.getElementById("dispositionedBy");
+
+          // // Loop through all options to find the one that matches the logged-in user
+          // for (let option of dropdown.options) {
+          //   console.log();
+          //   // if (option.value === loggedInUser) {
+          //   //   option.selected = true; // Select the matching option
+          //   //   break;
+          //   // }
+          // }
+        }
         try {
           const response = await fetch(SHEET_JSON_URL);
           if (!response.ok) {
@@ -510,8 +553,36 @@
         }
       }
 
+      async function reFetchCustomerDataOnLoad() {
+        try {
+          const response = await fetch(SHEET_JSON_URL);
+          if (!response.ok) {
+            console.error(
+              "Failed to fetch data:",
+              response.status,
+              response.statusText
+            );
+            // alert("Failed to fetch customer data. Please try again.");
+            return;
+          }
+
+          customerData = await response.json();
+          // console.log("Fetched customer data:", customerData);
+
+          // Show popup when data is successfully fetched
+          // showPopup("Customer data");
+
+          // After data is loaded, check if mobile number has 10 digits
+          // checkMobileNumber(); // Call to check the mobile number length
+        } catch (error) {
+          console.error("Error fetching customer data:", error);
+          // alert("Failed to fetch customer data. Please try again.");
+        }
+      }
+
       // Call the fetch function when the page is loaded
       window.onload = fetchCustomerDataOnLoad;
+      setInterval(reFetchCustomerDataOnLoad, 10000);
 
       // Check if mobile number has 10 digits before fetching data
       function checkMobileNumber() {
@@ -596,81 +667,7 @@
       }
     </script>
 
-    <!-- <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        document
-          .getElementById("mobile-number")
-          .addEventListener("blur", function () {
-            var mobileNumber = this.value;
-            if (mobileNumber.length === 10) {
-              fetch(
-                "https://script.google.com/macros/s/AKfycbyhZ1hPtMLDDNuv4M7SoqzOdhkWymlkYu--wFlhu1CMirvKu2oqeXhP5eYSvQgGc0qJ/exec?mobileNumber=" +
-                  mobileNumber
-              )
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error(
-                      "Network response was not ok: " + response.statusText
-                    );
-                  }
-                  return response.json();
-                })
-                .then((data) => {
-                  // Log the fetched data to the console
-                  console.log("Fetched Data:", data);
-
-                  if (data.error) {
-                    // Handle errors returned from the Apps Script
-                    alert(data.error);
-                    return; // Stop further execution
-                  }
-
-                  if (data.customerName) {
-                    alert("Customer Details Found");
-                    document.getElementById("customer-name").value =
-                      data.customerName;
-                    document.getElementById("gender").value = data.gender;
-                    document.getElementById("location").value = data.location;
-
-                    // Check if dateOfBirth is available
-                    if (data.dateOfBirth) {
-                      // Format the date of birth only if it's not empty
-                      var dob = new Date(data.dateOfBirth);
-                      var formattedDOB = dob.toISOString().split("T")[0];
-                      document.getElementById("date-of-birth").value =
-                        formattedDOB;
-                    } else {
-                      console.log("Date of Birth is not available.");
-                      document.getElementById("date-of-birth").value = ""; // Clear field if empty
-                    }
-
-                    document.getElementById("unsettled-amount").value =
-                      data.unsettledAmount;
-                    // document.getElementById("discount-amount").value =
-                    //   data.discountAmount;
-                  } else {
-                    // When customer details are not found
-                    alert("Customer Details not Found");
-                    // document.getElementById("customer-name").value = "";
-                    // document.getElementById("gender").value = "";
-                    // document.getElementById("location").value = "";
-                    // document.getElementById("date-of-birth").value = "";
-                    // document.getElementById("unsettled-amount").value = "";
-                    // document.getElementById("discount-amount").value = "";
-                  }
-                })
-                .catch((error) => {
-                  console.error("Error:", error);
-                  alert(
-                    "An error occurred while fetching customer details: " +
-                      error.message
-                  );
-                });
-            }
-          });
-      });
-    </script> -->
-    <script src="./src/js/script.js"></script>
+    <script src="../src/js/script.js"></script>
 
     <script>
       // JavaScript for handling the "Refresh" button click
@@ -686,6 +683,7 @@
           alert("Form has been reset.");
         });
     </script>
+
     <script>
       const totalAmountInput = document.getElementById("total-amount");
       const cashInput = document.getElementById("cash");

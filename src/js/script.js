@@ -33,10 +33,16 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    if (allFilled) {
-      form.classList.add("secActive");
+    const serviceSelect = document.getElementById("service-select").value;
+    const serviceInput = document.getElementById("service-input").value;
+    if (serviceSelect === "Select Service Name" || serviceInput === "") {
+      alert("Please specify the Service Operation in the input field.");
     } else {
-      alert("Please fill all required fields before proceeding.");
+      if (allFilled) {
+        form.classList.add("secActive");
+      } else {
+        alert("Please fill all required fields before proceeding.");
+      }
     }
   });
 
@@ -44,53 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
     form.classList.remove("secActive");
   });
-
-  // form.addEventListener("submit", function (e) {
-  //   e.preventDefault(); // Prevent form submission until confirmation
-
-  //   const debitedTransactionBank = document.getElementById(
-  //     "debited-transaction-bank"
-  //   ).value;
-
-  //   // Get the submit button
-  //   const submitButton = form.querySelector('button[type="submit"]');
-
-  //   // Confirmation alert before submission
-  //   if (confirm("Are you sure you want to submit the form?")) {
-  //     // Disable the submit button to prevent multiple clicks
-  //     submitButton.disabled = true;
-
-  //     // Check if transaction details are valid
-  //     if (debitedTransactionBank === "Select Debited Bank") {
-  //       alert("Please select valid Transaction Details.");
-  //       // Re-enable the button if the transaction details are not valid
-  //       submitButton.disabled = false;
-  //     } else {
-  //       // Proceed with form submission
-  //       const scriptURL =
-  //         "https://script.google.com/macros/s/AKfycbwFoBwuxHwSvfYdnHmDgF8mluvB12p_Jgr-0PioN1IDPvGPrN3lBa87aZk3dYQW9JFC/exec";
-
-  //       fetch(scriptURL, { method: "POST", body: new FormData(form) })
-  //         .then((response) => {
-  //           alert("Thank you! Your form is submitted successfully.");
-  //           // Reload the page or clear the form after submission
-  //           location.reload();
-  //         })
-  //         .catch((error) => {
-  //           console.error("Error!", error.message);
-  //           alert(
-  //             "An error occurred while submitting the form. Please try again."
-  //           );
-  //           // Re-enable the button if there is an error
-  //           submitButton.disabled = false;
-  //         });
-  //     }
-  //   } else {
-  //     // If user cancels, do nothing and re-enable the button
-  //     alert("Form submission cancelled.");
-  //     submitButton.disabled = false;
-  //   }
-  // });
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -166,6 +125,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const categorySelect = document.getElementById("category-select");
   const departmentSelect = document.getElementById("department-select");
   const serviceSelect = document.getElementById("service-select");
+  const serviceInput = document.getElementById("service-input"); // Text input field
+  const serviceContainer = document.getElementById("service-container"); // Container to hold both dropdown and input
 
   const secondDropdownOptions = {
     "General Services": [
@@ -387,6 +348,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
   };
 
+  // Function to update the second dropdown (department select)
+  // Function to update the second dropdown (department select)
   function updateSecondDropdown() {
     const selectedCategory = categorySelect.value;
     const relevantDepartments = secondDropdownOptions[selectedCategory] || [];
@@ -400,31 +363,69 @@ document.addEventListener("DOMContentLoaded", function () {
       departmentSelect.appendChild(option);
     });
 
+    // Clear service select dropdown when category changes
     serviceSelect.innerHTML =
       "<option disabled selected>Select Service Name</option>";
+
+    // Hide the text input when switching categories
+    restoreServiceSelect();
   }
 
+  // Function to update the third dropdown (service select)
   function updateThirdDropdown() {
     const selectedDepartment = departmentSelect.value;
-    const relevantServices = thirdDropdownOptions[selectedDepartment] || [];
 
-    serviceSelect.innerHTML =
-      "<option disabled selected>Select Service Name</option>";
-    if (relevantServices.length > 0) {
-      relevantServices.forEach((service) => {
-        const option = document.createElement("option");
-        option.value = service;
-        option.textContent = service;
-        serviceSelect.appendChild(option);
-      });
+    // If "Others" is selected, replace the dropdown with an input field
+    if (selectedDepartment === "Others") {
+      switchToTextInput();
     } else {
-      const option = document.createElement("option");
-      option.value = selectedDepartment;
-      option.textContent = selectedDepartment;
-      serviceSelect.appendChild(option);
+      switchToDropdown();
+
+      const relevantServices = thirdDropdownOptions[selectedDepartment] || [];
+
+      serviceSelect.innerHTML =
+        "<option disabled selected>Select Service Name</option>";
+
+      // Add relevant service options
+      if (relevantServices.length > 0) {
+        relevantServices.forEach((service) => {
+          const option = document.createElement("option");
+          option.value = service;
+          option.textContent = service;
+          serviceSelect.appendChild(option);
+        });
+      } else {
+        const option = document.createElement("option");
+        option.value = selectedDepartment;
+        option.textContent = selectedDepartment;
+        serviceSelect.appendChild(option);
+      }
     }
   }
 
+  // Function to switch to the text input field for "Others"
+  function switchToTextInput() {
+    // Hide the dropdown
+    serviceSelect.style.display = "none";
+    // Show the input field
+    serviceInput.style.display = "block";
+  }
+
+  // Function to switch back to the dropdown menu
+  function switchToDropdown() {
+    // Hide the text input
+    serviceInput.style.display = "none";
+    // Show the dropdown
+    serviceSelect.style.display = "block";
+  }
+
+  // Function to restore the dropdown when switching categories
+  function restoreServiceSelect() {
+    serviceSelect.style.display = "block";
+    serviceInput.style.display = "none";
+  }
+
+  // Event Listeners
   categorySelect.addEventListener("change", updateSecondDropdown);
   departmentSelect.addEventListener("change", updateThirdDropdown);
 
