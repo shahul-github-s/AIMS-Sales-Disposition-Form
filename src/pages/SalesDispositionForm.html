@@ -11,7 +11,7 @@
       const loginStatus = sessionStorage.getItem("login");
       if (loginStatus !== "Success") {
         // Redirect to index.html if login is not successful
-        window.location.href = "./index.html";
+        window.location.href = "../../index.html";
       }
     </script>
   </head>
@@ -472,7 +472,10 @@
     <!-- Popup Notification -->
     <div id="popup" class="popup"></div>
 
-    <button class="form-button" onclick="window.location.href='./index.html'">
+    <button
+      class="form-button"
+      onclick="window.location.href='../../index.html'"
+    >
       <img src="../images/logout-button.png" alt="Exit Icon" />
     </button>
 
