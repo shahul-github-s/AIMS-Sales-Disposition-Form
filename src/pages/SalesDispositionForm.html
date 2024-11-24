@@ -230,24 +230,6 @@
                   required
                   readonly
                 />
-                <!-- <select
-                  name="Dispositioned By"
-                  id="dispositionedBy"
-                  required
-                  title="Dispositioned By"
-                >
-                  <option disabled selected>Select Staff Name</option>
-                  <option value="Rajeswari S">Rajeswari S</option>
-                  <option value="Susmitha S">Susmitha S</option>
-                  <option value="Gayathri S">Gayathri S</option>
-                  <option value="Vasuthiyagarajan S">Vasuthiyagarajan S</option>
-                  <option value="Kaviya M">Kaviya M</option>
-                  <option value="Mathiazhagan">Mathiazhagan</option>
-                  <option value="Mohamed Refai">Mohamed Refai</option>
-                  <option value="Shaffi Hussain">Shaffi Hussain</option>
-                  <option value="Sheerin Banu A">Sheerin Banu A</option>
-                  <option value="Riyaz">Riyaz</option>
-                </select> -->
               </div>
             </div>
           </div>
@@ -474,6 +456,12 @@
     <!-- Popup Notification -->
     <div id="popup" class="popup"></div>
 
+    <!-- Box to display data -->
+    <div id="employee-box">
+      <div id="employee-name">Employee</div>
+      <div id="lead-count">Lead</div>
+    </div>
+
     <button
       class="form-button"
       onclick="window.location.href='../../index.html'"
@@ -511,6 +499,7 @@
 
       // Fetch customer data when the page is loaded
       async function fetchCustomerDataOnLoad() {
+        fetchEmployeeData();
         // Retrieve the logged-in user's name from localStorage
         const loggedInUser = sessionStorage.getItem("loggedInUser");
 
@@ -520,17 +509,6 @@
         // If the username exists in localStorage, set the dropdown selection
         if (loggedInUser) {
           document.getElementById("dispositionedBy").value = loggedInUser;
-
-          // const dropdown = document.getElementById("dispositionedBy");
-
-          // // Loop through all options to find the one that matches the logged-in user
-          // for (let option of dropdown.options) {
-          //   console.log();
-          //   // if (option.value === loggedInUser) {
-          //   //   option.selected = true; // Select the matching option
-          //   //   break;
-          //   // }
-          // }
         }
         try {
           const response = await fetch(SHEET_JSON_URL);
@@ -560,6 +538,7 @@
 
       async function reFetchCustomerDataOnLoad() {
         try {
+          fetchEmployeeData();
           const response = await fetch(SHEET_JSON_URL);
           if (!response.ok) {
             console.error(
@@ -585,9 +564,30 @@
         }
       }
 
+      async function fetchEmployeeData() {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbySyvjAvV07sF33RA6VYEh_af_S8YjKKdBNilyWdgM3DYWd7HyhWpEwMP6Nid4hOxyc/exec"
+        ); // Replace with your Web App URL
+        const data = await response.json();
+        console.log(data);
+
+        // Example: Match loggedInUser
+        const loggedInUser = sessionStorage.getItem("loggedInUser");
+        const userData = data.find(
+          (user) => user["Employees Name"] === loggedInUser
+        );
+
+        if (userData) {
+          document.getElementById("employee-name").innerText =
+            userData["Employees Name"];
+          document.getElementById("lead-count").innerText =
+            userData["Lead Count"];
+        }
+      }
+
       // Call the fetch function when the page is loaded
       window.onload = fetchCustomerDataOnLoad;
-      setInterval(reFetchCustomerDataOnLoad, 10000);
+      setInterval(reFetchCustomerDataOnLoad, 1000);
 
       // Check if mobile number has 10 digits before fetching data
       function checkMobileNumber() {

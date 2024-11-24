@@ -1,6 +1,4 @@
 @import url("https://unicons.iconscout.com/release/v4.0.0/css/line.css");
-
-/* ===== Google Font Import - Poppins ===== */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
 * {
   margin: 0;
@@ -252,6 +250,19 @@ input[type="number"] {
   }
 }
 
-#service-input{
-  display: none
+#service-input {
+  display: none;
+}
+
+#employee-box {
+  position: fixed; 
+  top: 50px; 
+  left: 15px; 
+  background-color: white; 
+  border: 2px solid black; 
+  text-align: center; 
+  padding: 10px; 
+  width: 200px; 
+  border-radius: 10px; /* Adds rounded corners */
+  
 }
