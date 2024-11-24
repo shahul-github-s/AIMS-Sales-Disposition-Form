@@ -125,15 +125,17 @@ document.addEventListener("DOMContentLoaded", function () {
     // Clear all the fields if no match is found or input is incomplete
     document.getElementById("category-select").value =
       "Select Service Category";
-    document.getElementById("department-select").value = "Select Debited Bank";
+    document.getElementById("department-select").value =
+      "Select Service Department";
     document.getElementById("service-select").value = "Select Service Name";
     document.getElementById("debited-transaction-bank").value =
-      "Select Service Name";
+      "Select Debited Bank";
     document.getElementById("application-charge").value = "0";
     document.getElementById("service-charge").value = "0";
     document.getElementById("cash").value = "";
     document.getElementById("upi").value = "";
     document.getElementById("total-amount").value = "0";
+    document.getElementById("cash").value = "0";
   }
   const categorySelect = document.getElementById("category-select");
   const departmentSelect = document.getElementById("department-select");
@@ -528,6 +530,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const applicationChargeInput = document.getElementById("application-charge");
   const serviceChargeInput = document.getElementById("service-charge");
   const totalAmountInput = document.getElementById("total-amount");
+  const cashAmountInput = document.getElementById("cash");
 
   applicationChargeInput.addEventListener("input", updateTotalAmount);
   serviceChargeInput.addEventListener("input", updateTotalAmount);
@@ -536,6 +539,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const applicationCharge = parseFloat(applicationChargeInput.value) || 0;
     const serviceCharge = parseFloat(serviceChargeInput.value) || 0;
     const totalAmount = applicationCharge + serviceCharge;
-    totalAmountInput.value = totalAmount.toFixed(2); // Display total with 2 decimal places
+    totalAmountInput.value = totalAmount; // Display total with 2 decimal places
+    cashAmountInput.value = totalAmount; // Display total with 2 decimal places
   }
 });
