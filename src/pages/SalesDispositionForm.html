@@ -683,6 +683,16 @@
           // Simulate refresh by resetting the form and re-enabling any disabled buttons
           const form = document.getElementById("form");
           form.reset(); // Clears all form fields
+          const loggedInUser = sessionStorage.getItem("loggedInUser");
+
+          // Debugging: Log retrieved value from localStorage
+          console.log("Retrieved from localStorage:", loggedInUser);
+
+          // If the username exists in localStorage, set the dropdown selection
+          if (loggedInUser) {
+            document.getElementById("dispositionedBy").value = loggedInUser;
+          }
+
           const submitButton = form.querySelector('button[type="submit"]');
           submitButton.disabled = false; // Re-enable the submit button
 
